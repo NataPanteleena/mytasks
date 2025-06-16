@@ -1,0 +1,92 @@
+.authContainer {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-weight: 500;
+    color: #555;
+  }
+
+  input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: #646cff;
+    }
+  }
+}
+
+.error {
+  color: #ff4d4f;
+  background: #fff2f0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #ffccc7;
+}
+
+.submitButton {
+  padding: 0.75rem;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1rem;
+
+  &:hover {
+    background: #5258cc;
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.switchAuth {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+}
+
+.linkButton {
+  background: none;
+  border: none;
+  color: #646cff;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

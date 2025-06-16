@@ -1,0 +1,47 @@
+.taskItem {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 2.5fr 1fr;
+  min-width: 500px;
+  gap: 5px;
+  padding: 5px;
+  align-items: center;
+  border: 1px solid #bdbdc2;
+  margin: 5px 0;
+}
+
+.categoryHome {
+  background-color: aquamarine;
+}
+
+.categoryWork {
+  background-color: darkgray;
+}
+
+.categoryPersonal {
+  background-color: cadetblue;
+}
+
+.categoryOthers {
+  background-color: white;
+}
+
+.taskItem__category {
+  grid-column: 1;
+}
+
+.taskItem__checkbox {
+  grid-column: 2;
+}
+
+.taskItem__task {
+  grid-column: 3;
+}
+
+.taskItem__button {
+  grid-column: 4;
+}
+
+.highPriority {
+  border: 3px solid red;
+}
+

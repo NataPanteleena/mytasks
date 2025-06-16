@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  background: #007bff;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.header__textblock {
+  display: block;
+  width: 400px;
+  justify-content: center;
+  align-content: center;
+}
+
+.headertext {
+  font-size: 1em;
+  color: #fff;
+}
+
+.logo {
+  height: 6em;
+  padding: 1em;
+}
+
+

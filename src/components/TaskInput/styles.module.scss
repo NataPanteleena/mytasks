@@ -1,0 +1,22 @@
+.task_input {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.task_text {
+  min-width: 250px;
+  height: 24px;
+}
+
+.checkbox {
+  color: #213547;
+}
+
+.select_form {
+  height: 24px;
+  font-size: 1em;
+  color: #888888;
+}
