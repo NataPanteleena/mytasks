@@ -1,5 +1,5 @@
-import style from './styles.module.scss';
-import React from 'react';
+import styles from './styles.module.scss';
+import React, {ReactNode} from 'react';
 
 
 interface IProps {
@@ -7,51 +7,32 @@ interface IProps {
     setCategory: (category: string) => void;
 }
 
+const categoriesVariants = [
+    {key: "all", variant: "Все"},
+    {key: "home", variant: "Дом"},
+    {key: "work", variant: "Работа"},
+    {key: "personal", variant: "Личные"},
+    {key: "other", variant: "Без категории"},
+]
 
-const Categories: React.FC<IProps> = ({category, setCategory}: IProps):JSX.Element => {
+const Categories: React.FC<IProps> = ({category, setCategory}: IProps):ReactNode => {
 
     return (
-      <div className="categories">
-        <div>
-          <h2 className={style.btn_h2}>Категории</h2>
-          <button
-            key="all"
-            className={category === 'Все' ? style.active : ''}
-            onClick={():void => setCategory('Все')}
-          >
-            Все категории
-          </button>
-          <button
-            key="home"
-            className={category === 'Дом' ? style.active : ''}
-            onClick={():void => setCategory('Дом')}
-          >
-            Дом
-          </button>
-          <button
-            key="work"
-            className={category === 'Работа' ? style.active : ''}
-            onClick={():void => setCategory('Работа')}
-          >
-            Работа
-          </button>
-          <button
-            key="personal"
-            className={category === 'Личные' ? style.active : ''}
-            onClick={():void => setCategory('Личные')}
-          >
-            Личные
-          </button>
-          <button
-            key="other"
-            className={category === 'Без категории' ? style.active : ''}
-            onClick={():void => setCategory('Без категории')}
-          >
-            Без категории
-          </button>
+        <div >
+            <h2 className={styles.btn_h2}>Категории</h2>
+            <div className={styles.categories}>
+                {categoriesVariants.map(({key, variant}):ReactNode => (
+                    <button
+                        key={key}
+                        className={category === key ? styles.active : styles.passive}
+                        onClick={():void => setCategory(key)}
+                    >
+                        {variant}
+                    </button>
+                ))}
+            </div>
         </div>
-      </div>
     );
-  };
+};
 
-        export default Categories;
+export default Categories;

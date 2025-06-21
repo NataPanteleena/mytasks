@@ -40,7 +40,6 @@ export default function TasksPage() {
 
     return (
         <div className={styles.app}>
-            <h1 className="text-xl font-bold mb-4">Задачи пользователя {user.name}</h1>
             <Header title="TODO List" text="Дорогу осилит идущий... Топай давай!!!" />
             <TaskInput userId={userId} />
             <TasksPanel userId={userId}/>
