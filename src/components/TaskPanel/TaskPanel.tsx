@@ -12,6 +12,7 @@ import {getTasks} from "@/store/tasks/selector";
 export default function TasksPanel({ userId }: { userId: number }): ReactNode {
     const dispatch = useAppDispatch();
     const tasks = useSelector((state: RootState) => getTasks(state));
+    const { loading } = useSelector((state: RootState) => state.tasks);
 
     const [filter, setFilter] = useState<string>('all');
     const [category, setCategory] = useState<string>('Все');
@@ -23,6 +24,7 @@ export default function TasksPanel({ userId }: { userId: number }): ReactNode {
 
     return (
         <div className={styles.task_panel}>
+            {loading && <div>Загрузка задач...</div>}
             <div className={styles.btn_block}>
                 <Categories category={category} setCategory={setCategory} />
                 <Filters filter={filter} setFilter={setFilter} />

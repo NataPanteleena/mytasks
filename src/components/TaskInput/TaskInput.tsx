@@ -1,8 +1,8 @@
 import React, {ReactNode, useState} from 'react';
 import style from "./styles.module.scss";
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addTask } from '@/store/tasks/tasksReducer';
+import { addTask } from '@/store/tasks/slice';
+import { addTask as addMockTask } from '@/services/mockApi'; // Импорт моковой функции
 
 interface IProps {
     userId: number;
@@ -14,14 +14,6 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
     const [checked, setChecked] = useState(false);
     const dispatch = useDispatch();
 
-
-    const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>):void => {
-        setInputValue(event.target.value);
-    };
-
-    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>):void => {
-        setSelectedOption(event.target.value);
-    };
 
     const handleCheckboxChange = (event:React.ChangeEvent<HTMLInputElement>):void => {
         setChecked(event.target.checked);
@@ -39,10 +31,12 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
             };
 
             try {
-                const response = await axios.post('https://67a328e431d0d3a6b7827b97.mockapi.io/api/todo/tasks', newTask);
-                console.log('Задача успешно сохранена:', response.data);
+                const response = await addMockTask(newTask);
+                //console.log('Задача успешно сохранена:', response.data);
+                console.log('Задача успешно сохранена:', response);
 
-                dispatch(addTask(response.data));
+                //dispatch(addTask(response.data));
+                dispatch(addTask(response));
 
                 setInputValue('');
                 setSelectedOption('Без категории');
@@ -58,7 +52,7 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
                    type="text"
                    placeholder="Введите задачу..."
                    value={inputValue}
-                   onChange={handleInputValue}
+                   onChange={(e) => setInputValue(e.target.value)}
             />
             <label className={style.checkbox} htmlFor="select">Срочно?</label>
             <input
@@ -70,7 +64,7 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
                 <select className={style.select_form}
                         id="select"
                         value={selectedOption}
-                        onChange={handleSelectChange}>
+                        onChange={(event) => setSelectedOption(event.target.value)}>
                     <option value="Без категории">Без категории</option>
                     <option value="Работа">Работа</option>
                     <option value="Дом">Дом</option>

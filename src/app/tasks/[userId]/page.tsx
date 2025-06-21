@@ -37,7 +37,6 @@ export default function TasksPage() {
     }, [user, userId, dispatch, router]);
 
     if (!user) return <div>Проверка авторизации...</div>;
-    if (loading) return <div>Загрузка задач...</div>;
 
     return (
         <div className={styles.app}>

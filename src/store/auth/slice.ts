@@ -1,4 +1,3 @@
-// src/store/auth/slice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {login, register} from "@/store/auth/thunks";
 
@@ -50,10 +49,12 @@ const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
+                localStorage.setItem('auth', JSON.stringify(state));
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
+                localStorage.setItem('auth', JSON.stringify(state));
             });
     },
 });

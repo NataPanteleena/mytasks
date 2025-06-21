@@ -3,27 +3,18 @@ import AuthForm from '@/components/AuthForm/AuthForm';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@/store/store';
 import { register } from '@/store/auth/thunks';
-
-interface RegisterResponse {
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    };
-    token: string;
-}
+import { IRegisterData, IAuthCredentials } from '@/types';
 
 export default function RegisterPage() {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const handleRegister = async (email: string, password: string, name: string) => {
+    const handleRegister = async (data: IRegisterData) => {
         try {
-            const action = await dispatch(register({ name, email, password }));
+            const action = await dispatch(register(data));
 
             if (register.fulfilled.match(action)) {
-                const payload = action.payload as RegisterResponse;
-                router.push(`/tasks/${payload.user.id}`);
+                router.push(`/tasks/${action.payload.user.id}`);
             } else if (register.rejected.match(action)) {
                 throw new Error(action.error.message || 'Registration failed');
             }
@@ -35,10 +26,7 @@ export default function RegisterPage() {
 
     return (
         <div className="auth-page">
-            <AuthForm
-                isLogin={false}
-                onSubmit={(email, password, name = '') => handleRegister(email, password, name)}
-            />
+            <AuthForm isLogin={false} onSubmit={handleRegister as (data: IAuthCredentials | IRegisterData) => Promise<void>} />
         </div>
     );
 }

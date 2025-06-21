@@ -2,13 +2,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './styles.module.scss';
+import {IAuthCredentials, IRegisterData} from "@/types";
 
-interface AuthFormProps {
-    onSubmit: (email: string, password: string, name?: string) => Promise<void>;
+interface IAuthFormProps {
+    onSubmit: (data: IAuthCredentials | IRegisterData) => Promise<void>;
     isLogin: boolean;
 }
 
-export default function AuthForm({ onSubmit, isLogin }: AuthFormProps) {
+export default function AuthForm({ onSubmit, isLogin }: IAuthFormProps) {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,12 +24,12 @@ export default function AuthForm({ onSubmit, isLogin }: AuthFormProps) {
 
         try {
             if (isLogin) {
-                await onSubmit(email, password);
+                await onSubmit({email, password});
             } else {
                 if (!name) {
                     throw new Error('Необходимо ввести имя');
                 }
-                await onSubmit(email, password, name);
+                await onSubmit({email, password, name});
             }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Возникла ошибка');
