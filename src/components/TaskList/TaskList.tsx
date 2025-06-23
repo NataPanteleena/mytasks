@@ -24,7 +24,7 @@ const TaskList: React.FC<IProps> = ({ tasks, filter, category }: IProps): ReactN
 
   return (
     <div className={style.tasks_list}>
-        <ul>
+        <ul className={style.ul}>
           {filteredTasks.map((task):ReactNode => (
             <TaskItem key={task.id} task={task} />
           ))}

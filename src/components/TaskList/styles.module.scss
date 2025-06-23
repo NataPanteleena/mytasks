@@ -1,5 +1,5 @@
 .tasks_list {
-  border: 1px solid #989dfb;
+  border: 1px solid #004875;
   border-radius: 5px;
   margin: 10px;
   padding: 5px;
@@ -10,5 +10,9 @@
   line-height: 1em;
 }
 .active {
-  background-color: #989dfb;
+  background-color: #004875;
+}
+
+.ul{
+  list-style-type: none;
 }

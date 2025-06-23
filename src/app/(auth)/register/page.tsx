@@ -15,18 +15,17 @@ export default function RegisterPage() {
 
             if (register.fulfilled.match(action)) {
                 router.push(`/tasks/${action.payload.user.id}`);
-            } else if (register.rejected.match(action)) {
-                throw new Error(action.error.message || 'Registration failed');
             }
+
         } catch (error) {
             console.error('Registration failed:', error);
-            throw error;
+            return error;
         }
     };
 
     return (
         <div className="auth-page">
-            <AuthForm isLogin={false} onSubmit={handleRegister as (data: IAuthCredentials | IRegisterData) => Promise<void>} />
+            <AuthForm isLogin={false} onSubmitAction={handleRegister as (data: IAuthCredentials | IRegisterData) => Promise<void>} />
         </div>
     );
 }

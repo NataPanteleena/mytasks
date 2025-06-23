@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loginUser, registerUser } from '@/services/mockApi';
-import { setCredentials } from './slice';
 
 interface AuthResponse {
     user: {
@@ -13,16 +12,18 @@ interface AuthResponse {
 
 export const login = createAsyncThunk<AuthResponse, { email: string; password: string }>(
     'auth/login',
-    async (credentials, { dispatch }) => {
-        const response = await loginUser(credentials);
-        return response;
+    async (credentials) => {
+        //const response = await loginUser(credentials);
+        //return response;
+        return await loginUser(credentials)
     }
 );
 
 export const register = createAsyncThunk<AuthResponse, { name: string; email: string; password: string }>(
     'auth/register',
-    async (userData, { dispatch }) => {
-         const response = await registerUser(userData);
-        return response;
+    async (userData) => {
+        //const response = await registerUser(userData);
+        //return response;
+        return registerUser(userData)
     }
 );

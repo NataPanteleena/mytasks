@@ -5,27 +5,33 @@
   gap: 5px;
   padding: 5px;
   align-items: center;
-  border: 1px solid #bdbdc2;
+  border: 1px solid #004875;
+  border-radius: 8px;
   margin: 5px 0;
 }
 
 .categoryHome {
   background-color: aquamarine;
+  border-radius: 8px;
 }
 
 .categoryWork {
   background-color: darkgray;
+  border-radius: 8px;
 }
 
 .categoryPersonal {
   background-color: cadetblue;
+  border-radius: 8px;
 }
 
 .categoryOthers {
   background-color: white;
+  border-radius: 8px;
 }
 
 .taskItem__category {
+  margin-left: 20px;
   grid-column: 1;
 }
 
@@ -39,6 +45,8 @@
 
 .taskItem__button {
   grid-column: 4;
+  cursor: pointer;
+  border: 1px solid #004875;
 }
 
 .highPriority {

@@ -5,11 +5,11 @@ import styles from './styles.module.scss';
 import {IAuthCredentials, IRegisterData} from "@/types";
 
 interface IAuthFormProps {
-    onSubmit: (data: IAuthCredentials | IRegisterData) => Promise<void>;
+    onSubmitAction: (data: IAuthCredentials | IRegisterData) => Promise<void>;
     isLogin: boolean;
 }
 
-export default function AuthForm({ onSubmit, isLogin }: IAuthFormProps) {
+export default function AuthForm({ onSubmitAction, isLogin }: IAuthFormProps) {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,12 +24,13 @@ export default function AuthForm({ onSubmit, isLogin }: IAuthFormProps) {
 
         try {
             if (isLogin) {
-                await onSubmit({email, password});
+                await onSubmitAction({email, password});
             } else {
                 if (!name) {
-                    throw new Error('Необходимо ввести имя');
+                    setError('Необходимо ввести имя');
+                    return;
                 }
-                await onSubmit({email, password, name});
+                await onSubmitAction({email, password, name});
             }
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Возникла ошибка');
@@ -40,7 +41,7 @@ export default function AuthForm({ onSubmit, isLogin }: IAuthFormProps) {
 
     return (
         <div className={styles.authContainer}>
-            <h2>{isLogin ? 'Login' : 'Register'}</h2>
+            <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
 
             {error && <div className={styles.error}>{error}</div>}
 
@@ -59,7 +60,7 @@ export default function AuthForm({ onSubmit, isLogin }: IAuthFormProps) {
                 )}
 
                 <div className={styles.formGroup}>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Адрес электронной почты</label>
                     <input
                         id="email"
                         type="email"

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import {RootState, useAppDispatch} from '@/store/store';
@@ -14,11 +14,13 @@ export default function TasksPage() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const userId = Number(params.userId);
-    const { loading } = useSelector((state: RootState) => state.tasks);
     const { user } = useSelector((state: RootState) => state.auth);
+    const [isMounted, setIsMounted] = useState(false);
 
 
     useEffect(() => {
+        setIsMounted(true);
+
         // Проверяем наличие пользователя в localStorage на случай, если страница была перезагружена
         const authData = localStorage.getItem('auth');
         const savedUser = authData ? JSON.parse(authData).user : null;
@@ -36,6 +38,7 @@ export default function TasksPage() {
         dispatch(fetchTasks(userId));
     }, [user, userId, dispatch, router]);
 
+    if (!isMounted) return <div>Загрузка...</div>;
     if (!user) return <div>Проверка авторизации...</div>;
 
     return (

@@ -2,7 +2,7 @@ import React, {ReactNode, useState} from 'react';
 import style from "./styles.module.scss";
 import { useDispatch } from 'react-redux';
 import { addTask } from '@/store/tasks/slice';
-import { addTask as addMockTask } from '@/services/mockApi'; // Импорт моковой функции
+import { addTask as addMockTask } from '@/services/mockApi';
 
 interface IProps {
     userId: number;

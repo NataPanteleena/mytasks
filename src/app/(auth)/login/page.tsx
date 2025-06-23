@@ -29,7 +29,7 @@ export default function LoginPage() {
         <div className="auth-page">
             <AuthForm
                 isLogin={true}
-                onSubmit={handleLogin}
+                onSubmitAction={handleLogin}
             />
         </div>
     );
