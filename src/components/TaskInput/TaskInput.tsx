@@ -32,10 +32,8 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
 
             try {
                 const response = await addMockTask(newTask);
-                //console.log('Задача успешно сохранена:', response.data);
                 console.log('Задача успешно сохранена:', response);
 
-                //dispatch(addTask(response.data));
                 dispatch(addTask(response));
 
                 setInputValue('');

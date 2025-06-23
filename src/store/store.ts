@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 const loadAuthState = () => {
     if (typeof window === 'undefined') {
-        return { user: null, token: null }; // Для серверного рендеринга
+        return { user: null, token: null };
     }
 
     try {
