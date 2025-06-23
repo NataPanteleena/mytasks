@@ -8,11 +8,11 @@ interface IProps {
 }
 
 const categoriesVariants = [
-    {key: "all", variant: "Все"},
-    {key: "home", variant: "Дом"},
-    {key: "work", variant: "Работа"},
-    {key: "personal", variant: "Личные"},
-    {key: "other", variant: "Без категории"},
+    {key: "Все", variant: "Все"},
+    {key: "Дом", variant: "Дом"},
+    {key: "Работа", variant: "Работа"},
+    {key: "Личные", variant: "Личные"},
+    {key: "Без категории", variant: "Без категории"},
 ]
 
 const Categories: React.FC<IProps> = ({category, setCategory}: IProps):ReactNode => {

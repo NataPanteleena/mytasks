@@ -1,8 +1,11 @@
 import {IUser, ITask} from "@/types";
 
 const users: IUser[] = [
-    { id: 1, name: 'User One', email: 'user1@test.com', password: '123456' },
-    { id: 2, name: 'User Two', email: 'user2@test.com', password: '123456' },
+    { id: 1, name: 'Наталья', email: 'user1@test.com', password: '123456' },
+    { id: 2, name: 'Татьяна', email: 'user2@test.com', password: '123456' },
+    { id: 3, name: 'Иван Петрович', email: 'user3@test.com', password: '123456' },
+    { id: 4, name: 'Святослав', email: 'user4@test.com', password: '123456' },
+
 ];
 
 // Инициализация задач

@@ -21,6 +21,18 @@ export default function TasksPanel({ userId }: { userId: number }): ReactNode {
         dispatch(fetchTasks(userId))
     }, [dispatch, userId]);
 
+    // Фильтрация задач на клиенте
+    const filteredTasks = tasks.filter(task => {
+        // Фильтр по категории
+        const categoryMatch = category === 'Все' || task.category === category;
+
+        // Фильтр по статусу
+        let statusMatch = true;
+        if (filter === 'completed') statusMatch = task.completed;
+        if (filter === 'active') statusMatch = !task.completed;
+
+        return categoryMatch && statusMatch;
+    });
 
     return (
         <div className={styles.task_panel}>
@@ -29,7 +41,7 @@ export default function TasksPanel({ userId }: { userId: number }): ReactNode {
                 <Categories category={category} setCategory={setCategory} />
                 <Filters filter={filter} setFilter={setFilter} />
             </div>
-            <TaskList tasks={tasks} filter={filter} category={category} />
+            <TaskList tasks={filteredTasks} />
         </div>
     );
 }
