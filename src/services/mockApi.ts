@@ -1,4 +1,4 @@
-import {IUser, ITask} from "@/types";
+import {ITask, IUser} from "@/types";
 import axios from "axios";
 
 export const API_URL = 'https://68541614a2a37a1d6f4b29cc.mockapi.io/api/mytasks';
@@ -24,7 +24,7 @@ export const loginUser = async (credentials: { email: string; password: string }
 export const registerUser = async (userData: { name: string; email: string; password: string }) => {
     const allUsers = await axios.get(`${API_URL}/users`);
 
-    const userExists = allUsers.data.some((user: any) => user.email === userData.email);
+    const userExists = allUsers.data.some((user: IUser) => user.email === userData.email);
     if (userExists) {
         throw new Error('Пользователь с таким email уже существует.');
     }

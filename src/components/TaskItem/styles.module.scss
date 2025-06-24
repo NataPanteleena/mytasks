@@ -32,24 +32,29 @@
 
 .taskItem__category {
   margin-left: 20px;
-  grid-column: 1;
 }
 
 .taskItem__checkbox {
-  grid-column: 2;
+  transform: scale(1.5);
 }
 
 .taskItem__task {
-  grid-column: 3;
+  font-size: 20px;
 }
 
 .taskItem__button {
-  grid-column: 4;
   cursor: pointer;
   border: 1px solid #004875;
 }
 
 .highPriority {
-  border: 3px solid red;
+  border: 2px solid red;
 }
 
+.completed{
+  opacity: 50%;
+}
+
+.taskItem__task_completed {
+  text-decoration: line-through;
+}

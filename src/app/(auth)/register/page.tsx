@@ -10,17 +10,10 @@ export default function RegisterPage() {
     const dispatch = useAppDispatch();
 
     const handleRegister = async (data: IRegisterData) => {
-        try {
             const action = await dispatch(register(data));
-
             if (register.fulfilled.match(action)) {
                 router.push(`/tasks/${action.payload.user.id}`);
             }
-
-        } catch (error) {
-            console.error('Registration failed:', error);
-            return error;
-        }
     };
 
     return (

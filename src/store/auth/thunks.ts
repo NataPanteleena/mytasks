@@ -16,7 +16,11 @@ export const login = createAsyncThunk<AuthResponse, { email: string; password: s
 
 export const register = createAsyncThunk<AuthResponse, { name: string; email: string; password: string }>(
     'auth/register',
-    async (userData) => {
-        return registerUser(userData);
+    async (userData, {rejectWithValue}) => {
+        try {
+            return registerUser(userData);
+        } catch {
+            return rejectWithValue("Произошла ошибка");
+        }
     }
 );
