@@ -1,46 +1,13 @@
-import {IUser, ITask} from "@/types";
+import {ITask, IUser} from "@/types";
+import axios from "axios";
 
-const users: IUser[] = [
-    { id: 1, name: 'Наталья', email: 'user1@test.com', password: '123456' },
-    { id: 2, name: 'Татьяна', email: 'user2@test.com', password: '123456' },
-    { id: 3, name: 'Иван Петрович', email: 'user3@test.com', password: '123456' },
-    { id: 4, name: 'Святослав', email: 'user4@test.com', password: '123456' },
-
-];
-
-// Инициализация задач
-let tasks: ITask[] = [];
-
-// Безопасный доступ к localStorage
-const getLocalStorage = (): Storage | null => {
-    return typeof window !== 'undefined' ? window.localStorage : null;
-};
-
-// Загрузка задач из localStorage
-const loadTasks = (): ITask[] => {
-    try {
-        const storage = getLocalStorage();
-        const saved = storage?.getItem('mockTasks');
-        return saved ? JSON.parse(saved) : [];
-    } catch (error) {
-        console.error('Error loading tasks:', error);
-        return [];
-    }
-};
-
-// Инициализация задач при загрузке модуля
-tasks = loadTasks();
+export const API_URL = 'https://68541614a2a37a1d6f4b29cc.mockapi.io/api/mytasks';
 
 export const loginUser = async (credentials: { email: string; password: string }) => {
-    // Имитация задержки сети
-    await new Promise(resolve => setTimeout(resolve, 500));
+   const response = await axios.get(`${API_URL}/users?email=${credentials.email}`);
+   const user = response.data[0];
 
-    const user = users.find(u =>
-        u.email === credentials.email &&
-        u.password === credentials.password
-    );
-
-    if (!user) {
+    if (user.password !== credentials.password) {
         throw new Error('Неверный email или пароль');
     }
 
@@ -55,55 +22,29 @@ export const loginUser = async (credentials: { email: string; password: string }
 };
 
 export const registerUser = async (userData: { name: string; email: string; password: string }) => {
-    // Имитация задержки сети
-    await new Promise(resolve => setTimeout(resolve, 500));
+    const allUsers = await axios.get(`${API_URL}/users`);
 
-    // Проверка на существующий email
-    if (users.some(u => u.email === userData.email)) {
-        throw new Error('Пользователь с таким email уже существует');
+    const userExists = allUsers.data.some((user: IUser) => user.email === userData.email);
+    if (userExists) {
+        throw new Error('Пользователь с таким email уже существует.');
     }
 
-    // Генерация нового ID
-    const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
-    const newUser = { ...userData, id: newId };
-
-    users.push(newUser);
-
+    const response = await axios.post(`${API_URL}/users`, userData);
     return {
-        user: {
-            id: newUser.id,
-            name: newUser.name,
-            email: newUser.email
-        },
-        token: 'mock-token-' + newId
+        user: response.data,
+        token: 'mock-token-' + response.data.id
     };
 };
 
 export const fetchUserTasks = async (userId: number) => {
-    await new Promise(resolve => setTimeout(resolve, 300)); // Имитация загрузки
-    return tasks.filter(task => task.userId === userId);
+    const response = await axios.get(`${API_URL}/tasks?userId=${userId}`);
+    return response.data;
 };
 
 export const addTask = async (taskData: Omit<ITask, 'id'>) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
-    const newTask = { ...taskData, id: newId };
-
-    tasks.push(newTask);
-
-    // Сохранение в localStorage
-    try {
-        const storage = getLocalStorage();
-        storage?.setItem('mockTasks', JSON.stringify(tasks));
-    } catch (error) {
-        console.error('Error saving tasks:', error);
-    }
-
-    return newTask;
-};
-
-export const mockApi = {
-    baseURL: '/api/mock-tasks',
-    tasks,
+    const response = await axios.post(`${API_URL}/tasks`, {
+        ...taskData,
+        userId: taskData.userId
+    });
+    return response.data;
 };

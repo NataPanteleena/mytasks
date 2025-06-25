@@ -1,8 +1,10 @@
+@use "../styles/variables" as *;
+
 .app {
   min-width: 500px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #fff;
+  margin: 20px auto;
+  padding: 0 20px;
+  background: $secondary-font-color;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

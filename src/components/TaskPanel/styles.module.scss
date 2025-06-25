@@ -1,12 +1,16 @@
+@use "../../styles/variables" as *;
+
 .task_panel {
   display: grid;
-  grid-template-columns: 1fr 5fr;
-  border: 2px solid #535bf2;
+  grid-template-columns: 1fr 6fr;
+  border: 2px solid $primary-border-color;
   border-radius: 5px;
+  margin: 10px;
 }
 .btn_block {
   grid-column: 1;
   margin: 10px;
+  align-self: center;
 }
 
 .top_text {

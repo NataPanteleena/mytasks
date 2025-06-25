@@ -1,8 +1,7 @@
 import React, {ReactNode, useState} from 'react';
 import style from "./styles.module.scss";
-import { useDispatch } from 'react-redux';
-import { addTask } from '@/store/tasks/slice';
-import { addTask as addMockTask } from '@/services/mockApi';
+import {createTask} from "@/store/tasks/thunks";
+import {useAppDispatch} from "@/store/store";
 
 interface IProps {
     userId: number;
@@ -12,7 +11,7 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
     const [inputValue, setInputValue] = useState<string>('');
     const [selectedOption, setSelectedOption] = useState<string>('Без категории');
     const [checked, setChecked] = useState(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
 
     const handleCheckboxChange = (event:React.ChangeEvent<HTMLInputElement>):void => {
@@ -31,12 +30,7 @@ const TaskInput: React.FC<IProps> = ({ userId }: IProps): ReactNode => {
             };
 
             try {
-                const response = await addMockTask(newTask);
-                //console.log('Задача успешно сохранена:', response.data);
-                console.log('Задача успешно сохранена:', response);
-
-                //dispatch(addTask(response.data));
-                dispatch(addTask(response));
+                dispatch(createTask(newTask));
 
                 setInputValue('');
                 setSelectedOption('Без категории');

@@ -2,7 +2,6 @@ export interface IUser {
     id: number;
     name: string;
     email: string;
-    password: string;
 }
 
 export interface ITask {
@@ -30,15 +29,6 @@ export interface ILoginResponse {
         id: number;
         email: string;
         name: string;
-    };
-    token: string;
-}
-
-export interface IRegisterResponse {
-    user: {
-        id: number;
-        name: string;
-        email: string;
     };
     token: string;
 }

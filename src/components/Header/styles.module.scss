@@ -1,6 +1,8 @@
+@use "../../styles/variables" as *;
+
 .header {
   padding: 10px;
-  background: white;
+  background: $secondary-font-color;
 }
 
 .header_innerBlock {
@@ -8,51 +10,79 @@
   justify-content: center;
   text-align: center;
   margin: 0 auto;
-  background: #0067a5;
-  color: #fff;
+  background: $primary-background-color;
+  color: $secondary-font-color;
   border-radius: 15px;
-
 }
 
 .header__textblock {
   display: block;
-  width: 400px;
   justify-content: center;
   align-content: center;
+  margin: 10px 0;
+}
+.h1_main{
+  font-size: 2em;
+  margin: 20px;
+  @media (max-width: 1024px) {
+    font-size: 1.5em;
+    margin: 10px;
+  }
 }
 
 .headertext {
   font-size: 1em;
-  color: white;
+  color: $secondary-font-color;
 }
 
 .logo {
   height: 6em;
   width: auto;
   padding: 1em;
+  @media (max-width: 1024px) {
+    height: 4em;
+  }
 }
 
 .header__userblock {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  @media (max-width: 1024px) {
+    margin-bottom: 10px;
+  }
 }
 
 .exit_button {
-  background-color: #0067a5;
+  background-color: $primary-background-color;
   border-radius: 24px;
   width: 220px;
-  height: 42px;
-  color: white;
+  height: 38px;
+  color: $secondary-font-color;
   cursor: pointer;
-  border: 1px solid #004875;
+  border: 1px solid $primary-border-color;
+  @media (max-width: 1440px) {
+    width: 180px;
+    height: 32px;
+  }
+  @media (max-width: 1024px) {
+    width: 140px;
+    height: 28px;
+  }
 }
 
 .exit_button:hover {
-  background-color: #0087db;
+  background-color: $background-color_hover;
 }
 
-.userDef{
-  font-size: 16px;
+.header_userDef{
+  font-size: 20px;
   font-weight: bold;
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
 }

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {login, register} from "@/store/auth/thunks";
 
 interface User {
@@ -12,7 +12,7 @@ interface AuthState {
     token: string | null;
 }
 
-// Функция для загрузки состояния из localStorage
+// Загрузка состояния из localStorage на случай обновления страницы
 const loadAuthState = (): AuthState => {
     if (typeof window === 'undefined') {
         return { user: null, token: null };
@@ -33,15 +33,10 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setCredentials: (state, action: PayloadAction<{ user: User; token: string }>) => {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
-            localStorage.setItem('auth', JSON.stringify(state));
-        },
         logout: (state) => {
             state.user = null;
             state.token = null;
-            localStorage.removeItem('auth');
+            localStorage.clear();
         },
     },
     extraReducers: (builder) => {
@@ -59,5 +54,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

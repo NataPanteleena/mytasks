@@ -1,3 +1,5 @@
+@use "../../styles/variables" as *;
+
 .taskItem {
   display: grid;
   grid-template-columns: 1fr 0.5fr 2.5fr 1fr;
@@ -5,51 +7,62 @@
   gap: 5px;
   padding: 5px;
   align-items: center;
-  border: 1px solid #004875;
+  border: 1px solid $background-color_hover;
   border-radius: 8px;
   margin: 5px 0;
+  @media (max-width: 1024px) {
+    min-width: 300px;
+  }
 }
 
 .categoryHome {
-  background-color: aquamarine;
+  background-color: $background-cat-home;
   border-radius: 8px;
 }
 
 .categoryWork {
-  background-color: darkgray;
+  background-color: $background-cat-work;
   border-radius: 8px;
 }
 
 .categoryPersonal {
-  background-color: cadetblue;
+  background-color: $background-cat-personal;
   border-radius: 8px;
 }
 
 .categoryOthers {
-  background-color: white;
+  background-color: $background-cat-other;
   border-radius: 8px;
 }
 
 .taskItem__category {
   margin-left: 20px;
-  grid-column: 1;
 }
 
 .taskItem__checkbox {
-  grid-column: 2;
+  transform: scale(1.5);
+  @media (max-width: 1024px) {
+    transform: scale(1.2);
+  }
 }
 
 .taskItem__task {
-  grid-column: 3;
+  font-size: 20px;
 }
 
 .taskItem__button {
-  grid-column: 4;
   cursor: pointer;
-  border: 1px solid #004875;
+  border: 1px solid $background-color_hover;
 }
 
 .highPriority {
-  border: 3px solid red;
+  border: 2px solid $border-priority;
 }
 
+.completed{
+  opacity: 50%;
+}
+
+.taskItem__task_completed {
+  text-decoration: line-through;
+}

@@ -1,23 +1,29 @@
+@use "../../styles/variables" as *;
+
 .active {
-  border: 0.5px solid #0067a5;
-  border-radius: 8px;
-  background-color: #528fd9;
-}
-
-.btn_h2 {
-  color: #213547;
-  line-height: 1em;
-
-}
-.categories {
-  display: flex;
-  flex-wrap: nowrap;
-  max-width: 400px;
-  gap: 10px;
+  background-color: $background-color_active;
 }
 
 .passive{
-  border: 0.5px solid #0067a5;
+  background: $background-color_passive;
+}
+
+.categories_btn{
+  border: 0.5px solid $primary-background-color;
   border-radius: 8px;
-  background: #d3deed;
+  width: 160px;
+  height: 24px;
+  margin: 5px 0;
+}
+
+.btn_h2 {
+  color: $secondary-title-color;
+  line-height: 1em;
+  margin: 10px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
