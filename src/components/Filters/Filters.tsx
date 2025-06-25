@@ -22,7 +22,7 @@ const Filters: React.FC<IProps> = ({ filter, setFilter }: IProps): ReactNode  =>
                 {filterVariants.map(({key, variant}):ReactNode => (
                     <button
                         key={key}
-                        className={filter === key ? styles.active : styles.passive}
+                        className={`${styles.filters_btn} ${filter === key ? styles.active : styles.passive}`}
                         onClick={():void => setFilter(key)}
                     >
                         {variant}

@@ -22,7 +22,7 @@ export const createTask = createAsyncThunk(
             return await apiAddTask(taskData);
 
         } catch {
-            dispatch(deleteTask(tempId)); // Удаляем задачу из UI
+            dispatch(deleteTask(tempId)); // Удаляем задачу
             return rejectWithValue('Не удалось создать задачу');
         }
     }
@@ -30,7 +30,7 @@ export const createTask = createAsyncThunk(
 
 export const deleteTaskOptimistic = createAsyncThunk(
     'tasks/deleteOptimistic',
-    async (taskId: number, { dispatch, getState, rejectWithValue }) => {
+    async (taskId: ITask['id'], { dispatch, getState, rejectWithValue }) => {
         const state = getState() as RootState;
         const taskToDelete = state.tasks.tasks.find(task => task.id === taskId);
 
@@ -54,7 +54,7 @@ export const deleteTaskOptimistic = createAsyncThunk(
 
 export const toggleTaskOptimistic = createAsyncThunk (
     'tasks/toggleOptimistic',
-    async (taskId: number, {dispatch, getState, rejectWithValue}) =>{
+    async (taskId: ITask['id'], {dispatch, getState, rejectWithValue}) =>{
         const state = getState() as RootState;
         const taskToToggle = state.tasks.tasks.find(task => task.id === taskId);
 
@@ -65,7 +65,7 @@ export const toggleTaskOptimistic = createAsyncThunk (
         try {
             dispatch(toggleTaskCompletion(taskId));
             await axios.put(`${API_URL}/tasks/${taskId}`, {
-                ...taskToToggle, // Отправляем всю задачу
+                ...taskToToggle,
                 completed: !taskToToggle.completed,
             });
         } catch {

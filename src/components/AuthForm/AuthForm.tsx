@@ -33,7 +33,14 @@ export default function AuthForm({ onSubmitAction, isLogin }: IAuthFormProps) {
                 await onSubmitAction({email, password, name});
             }
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'Возникла ошибка');
+            const errorMessage = err instanceof Error ? err.message : '';
+            if (errorMessage.includes('404') || errorMessage.includes('Failed to fetch')) {
+                setError('Пользователь не найден');
+            } else if (errorMessage.includes('401') || errorMessage.includes('Unauthorized')) {
+                setError('Неверный email или пароль');
+            } else {
+                setError('Произошла ошибка при авторизации');
+            }
         } finally {
             setIsLoading(false);
         }

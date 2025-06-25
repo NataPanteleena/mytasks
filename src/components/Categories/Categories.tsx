@@ -18,13 +18,13 @@ const categoriesVariants = [
 const Categories: React.FC<IProps> = ({category, setCategory}: IProps):ReactNode => {
 
     return (
-        <div >
+        <div>
             <h2 className={styles.btn_h2}>Категории</h2>
             <div className={styles.categories}>
                 {categoriesVariants.map(({key, variant}):ReactNode => (
                     <button
                         key={key}
-                        className={category === key ? styles.active : styles.passive}
+                        className={`${styles.categories_btn} ${category === key ? styles.active : styles.passive}`}
                         onClick={():void => setCategory(key)}
                     >
                         {variant}

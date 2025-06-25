@@ -61,7 +61,7 @@ const TaskItem: React.FC<IProps> = ({ task }: IProps): ReactNode => {
       <div className={`${getPriority(task.priority)} ${getBackgroundColor(task.category)} ${getToggleMark(task.completed)}`}>
           <li className={`task-item ${task.completed ? 'completed' : ''}`}>
             <div className={styles.taskItem}>
-            <span className={styles.taskItem__category}>{task.category}</span>
+            <span className={styles.taskItem__category} >{task.category}</span>
             <div>
             <input
               className={styles.taskItem__checkbox}

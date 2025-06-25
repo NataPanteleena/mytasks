@@ -1,22 +1,27 @@
+@use "../../styles/variables" as *;
+
 .task_input {
   display: flex;
   gap: 10px;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .task_text {
   min-width: 250px;
   height: 24px;
+  @media (max-width: 1024px) {
+    min-width: 200px;
+  }
 }
 
 .checkbox {
-  color: #213547;
+  color: $primary-border-color;
 }
 
 .select_form {
   height: 24px;
   font-size: 1em;
-  color: #888888;
+  color: $primary-lable-color;
 }

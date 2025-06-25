@@ -38,11 +38,7 @@ export const registerUser = async (userData: { name: string; email: string; pass
 
 export const fetchUserTasks = async (userId: number) => {
     const response = await axios.get(`${API_URL}/tasks?userId=${userId}`);
-    if (response.data.length === 0) {
-        throw new Error('Задач пока нет.');
-    } else {
     return response.data;
-    }
 };
 
 export const addTask = async (taskData: Omit<ITask, 'id'>) => {

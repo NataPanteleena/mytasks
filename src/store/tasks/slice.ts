@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITask } from '@/types';
 import {fetchTasks} from "@/store/tasks/thunks";
+import {logout} from "@/store/auth/slice";
 
 
 interface TasksState {
@@ -44,7 +45,13 @@ const tasksSlice = createSlice({
             .addCase(fetchTasks.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Failed to fetch';
-            });
+            })
+            .addCase(logout, state => {
+                state.tasks = [];
+                state.loading = false;
+                state.error = null;
+            })
+
     }
 });
 

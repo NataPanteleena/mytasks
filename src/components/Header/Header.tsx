@@ -26,13 +26,13 @@ const Header: React.FC<IProps> = ({ title, text}: IProps):ReactNode => {
     return (
         <header className={styles.header}>
             <div className={styles.header__userblock}>
-                <h1 className={styles.header_userDef}>Задачи пользователя {user?.name}</h1>
+                <h1 className={styles.header_userDef}>Пользователь: {user?.name}</h1>
                 <button className={styles.exit_button} onClick={handleLogout}>Выйти</button>
             </div>
             <div className={styles.header_innerBlock}>
                 <Image src={myLogo} className={styles.logo} alt="logo" />
                 <div className={styles.header__textblock}>
-                    <h1>{title}</h1>
+                    <h1 className={styles.h1_main}>{title}</h1>
                     <span className={styles.headertext}>{text}</span>
                 </div>
             </div>
