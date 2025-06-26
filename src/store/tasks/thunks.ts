@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {fetchUserTasks, addTask as apiAddTask, API_URL} from '../../services/mockApi';
 import {ITask} from "@/types";
-import {addTask, deleteTask, toggleTaskCompletion} from "@/store/tasks/slice";
+import {addTask, deleteTask, toggleTaskCompletion, replaceTask} from "@/store/tasks/slice";
 import axios from "axios";
 import {RootState} from "@/store/store";
 
@@ -19,10 +19,12 @@ export const createTask = createAsyncThunk(
         dispatch(addTask({ ...taskData, id: tempId }));
 
         try {
-            return await apiAddTask(taskData);
+            const newTask = await apiAddTask(taskData);
+
+            dispatch(replaceTask({tempId, newTask}));
 
         } catch {
-            dispatch(deleteTask(tempId)); // Удаляем задачу
+            dispatch(deleteTask(tempId));
             return rejectWithValue('Не удалось создать задачу');
         }
     }
